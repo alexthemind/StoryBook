@@ -65,7 +65,32 @@
                         Glosario de recursos para desarrollo front con Siebel, listado de componentes a utilizar, puedes guiarte del indice para consultar cada componente.
                     </p>
                     <br>
+                    <!-- TABS -->                
+                    <div id="tabs-menu" class="text-sm font-medium text-center text-white border-b border-white">
+                        <ul class="flex flex-wrap -mb-px">
+                            <li class="mr-2">
+                                <a href="#" data-target="container-1" class="inline-block p-4 border-b border-white rounded-t hover:bg-teal-600 transition hover:text-yellow-400 hover:border-yellow-400">
+                                    <i class="fa fa-th mr-[1em]"></i> Ejemplos
+                                </a>
+                            </li>
+                            <li class="mr-2">
+                                <a href="#" data-target="container-2" class="inline-block p-4 border-b border-white rounded-t hover:bg-teal-600 transition hover:text-yellow-400 hover:border-yellow-400">
+                                    <i class="fa fa-cubes mr-[1em]"></i> Otras combinaciones
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="container-1" class="container_a pt-[2em]"></div>
+                    <div id="container-2" class="container_a pt-[2em] hidden">
+                        <div class="flex flex-col justify-center items-center">
+                            <span class="loader"></span>
+                            <br>
+                            <span class="text-[10px] p-1 rounded shadow-lg bg-blue-600">En desarrollo...</span>
+                        </div>
+                    </div>
                     <br>
+                    <br>
+                    <!---------->
                 </div>
                 <button id="btn-browser-up" class="transition rounded-full h-[2.5em] w-[2.5em] p-2 shadow-lg bg-orange-500 hover:bg-orange-600 text-white fixed z-10 bottom-[1em] right-[1.5%] font-bold text-lg">
                     <i class="fa fa-arrow-up"></i>

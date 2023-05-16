@@ -98,7 +98,25 @@ const putStyleAndElement = function(str:string, prefix:string, input:string, sty
         i++
     })
 
-    return puzzle
+    // QUINTA COINCIDENCIA
+    i = 0;
+    indices = [];
+    while(result = regExp.exec(puzzle))
+    {
+        i != 0 && indices.push(result.index);
+        i++;
+    }
+
+    i = 0
+    indices.map(index => {
+        if(i == 2)
+        {
+            puzzle = eachWordChains(index,puzzle,prefix,style);
+        }
+        i++
+    })
+
+    return puzzle;
 }
 
 const eachWordChains = function(initial:number,str:string,key:string,style:string) {

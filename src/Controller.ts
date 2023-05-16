@@ -6,6 +6,8 @@ export default class Controller {
     center: HTMLElement;
     centerContainer: HTMLElement;
     right: HTMLElement;
+    container1: HTMLElement;
+    container2: HTMLElement;
 
     constructor() {
         this.renderTemplate();
@@ -16,6 +18,8 @@ export default class Controller {
         this.center = this.document.getElementById('center');
         this.centerContainer = this.document.getElementById('center-container');
         this.right = this.document.getElementById('right');
+        this.container1 = this.document.getElementById('container-1');
+        this.container2 = this.document.getElementById('container-2');
     }
 
     renderTemplate(container?:HTMLElement,cb?:any) {

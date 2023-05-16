@@ -12,6 +12,7 @@ let collection = {
     row_id: '_row.id',
     name: 'name:',
     _name: '"Nombre"',
+    _lname: '"Apellido"',
     _name_: '"name"',
     target: 'target:',
     alert: 'alert',
@@ -31,7 +32,8 @@ let collection = {
     vstack: 'VStack',
     hstack: 'HStack',
     tbl: 'tbl',
-    table: 'Table',
+    table: 'Table<',
+    TableConstructor: 'TableConstructor',
     str: 'string',
     header: 'header',
     sourceData: 'sourceData',
@@ -66,6 +68,9 @@ let collection = {
     numIden: '"Número de Identificación"',
     idText: '"idtext"',
     nombre: '"Nómbre"',
+    apellido: '"Apellido"',
+    outsideBorder: 'outsideBorder',
+    number: 'number',
     get: function(name:string) {
         return this[name];
     }
@@ -85,6 +90,7 @@ let stylesClass: any = {
     row_id: "text-cyan-300",
     name: "text-cyan-300",
     _name: "text-red-300",
+    _lname: "text-red-300",
     _name_: "text-red-300",
     target: "text-yellow-300",
     alert: "text-yellow-300",
@@ -139,6 +145,10 @@ let stylesClass: any = {
     numIden: "text-red-300",
     idText: "text-red-300",
     nombre: "text-red-300",
+    apellido: "text-red-300",
+    outsideBorder: "text-cyan-300",
+    TableConstructor: "text-teal-400",
+    number: "text-teal-300"
 }
 
 export {

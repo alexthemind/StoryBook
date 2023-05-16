@@ -6,8 +6,22 @@ import {
     ,exampleBlockContent
     ,implementScrollUp
     ,activeSearchInput
+    ,actionTabs
 } from './ElementCollections';
-import { TextElement } from 'ait-bpd-common-core';
+import { 
+     TextElement
+    ,ButtonElement 
+    ,ButtonElementType
+    ,VStack
+    ,HStack
+    ,Table
+    ,TableConstructor
+    ,SelectElement
+    ,GenericIcon
+    ,IconDAV
+    ,InputElement
+    ,VStackType
+} from 'ait-bpd-common-core';
 
 
 
@@ -27,6 +41,7 @@ class CenterBlock extends Controller {
 
         this.center && implementScrollUp(this.center);
         this.left && activeSearchInput(this.left);
+        this.center && actionTabs(this.center);
     }
 
     initPage() {
@@ -37,10 +52,6 @@ class CenterBlock extends Controller {
         this.exmapleContentText("texto");
         this.shadeText("Button");
         this.exmapleContentButton("button");
-        this.shadeText("X-Button");
-        this.exmapleContentXButton("x-button");
-        this.shadeText("Div");
-        this.exmapleContentDiv("div");
         this.shadeText("VStack");
         this.exmapleContentVStack("vstack");
         this.shadeText("HStack");
@@ -58,7 +69,6 @@ class CenterBlock extends Controller {
             { name: 'Texto', href: 'texto',icon: 'fa fa-caret-right text' },
             { name: 'Button', href: 'button',icon: 'fa fa-caret-right' },
             { name: 'X-Button', href: 'x-button',icon: 'fa fa-caret-right' },
-            { name: 'Div', href: 'div',icon: 'fa fa-caret-right' },
             { name: 'VStack', href: 'vstack',icon: 'fa fa-caret-right' },
             { name: 'HStack', href: 'hstack',icon: 'fa fa-caret-right' },
             { name: 'Table', href: 'table',icon: 'fa fa-caret-right' },
@@ -71,11 +81,11 @@ class CenterBlock extends Controller {
     }
 
     textBlock(str:string) {
-        textDarkBlock(str,this.centerContainer);
+        textDarkBlock(str,this.container1);
     }
 
     shadeText(str:string,icon?:string) {
-        shadeTextBlock(str,this.centerContainer,icon);
+        shadeTextBlock(str,this.container1,icon);
     }
 
     exmapleContentText(id:string) {
@@ -87,12 +97,14 @@ new TextElement("Hola a todos",{
         
         let textElm = new TextElement("Hola a todos", { class: ["border","p-2","rounded"] });
         
-        exampleBlockContent(this.lorem,code,textElm,this.centerContainer,true,id);
+        exampleBlockContent(this.lorem,code,textElm,this.container1,true,id);
     }
 
     exmapleContentButton(id:string) {
         let code = `
-new ButtonElement("Click aquí",{
+new ButtonElement(
+    new TextElement("Click aquí")
+    ,{
     target: () => {
         alert("hola cómo estas");
     },
@@ -100,29 +112,32 @@ new ButtonElement("Click aquí",{
     class: ["custom-css"]
 });
         `;
-        let output = `<b>output:</b> <button onclick="alert('hola cómo estas')" class="ml-[1em] transition px-3 py-[.35em] bg-red-500 hover:bg-red-600 text-white rounded-sm shadow">click aquí</button>`;
+        let output = new ButtonElement(
+            new TextElement("Click aquí")
+            ,{
+            target: () => {
+                alert("hola cómo estas");
+            },
+            //type: ButtonElementType.Primary,
+            class: [
+                "w-[30%]",
+                "bg-red-500",
+                "text-white",
+                "p-3",
+                "rounded",
+                "hover:bg-red-600",
+                "transition",
+                "flex",
+                "justify-center",
+                "items-center"
+            ]
+        });
 
-        exampleBlockContent(this.lorem,code,null,this.centerContainer,true,id);
-    }
-
-    exmapleContentXButton(id:string) {
-        let code = `<x-app-button button-type="primary" button-text="Verificar" x-id="auth-verify-relation"></x-app-button>\n\n let btn = document.querySelector("x-app-button");\n\nbtn.onclick = () => alert("Hola a todos");`;
-        let output = `<b>output:</b> <button onclick="alert('Hola a todos')" class="ml-[1em] bg-blue-700 hover:bg-blue-800 text-white rounded-sm px-3 py-1" id="auth-verify-relation">Verificar</button>`;
-
-        let html = false
-        exampleBlockContent(this.lorem,code,null,this.centerContainer,html,id);
-    }
-
-    exmapleContentDiv(id:string) {
-        let code = `
-new DivElement(
-    new TextElement("Saludos"),{
-        class: ["custom-css"]
-});
-        `;
-        let output = `<b>output:</b> <span class="ml-[1em] px-3 py-1 border border-gray-200">Saludos</span>`;
-
-        exampleBlockContent(this.lorem,code,null,this.centerContainer,true,id);
+        exampleBlockContent(this.lorem,code,output,this.container1,true,id).then(co => {
+            let divided = co.querySelector('.divided');
+            let divs = divided.querySelectorAll('div');
+                divs[1].classList.add('h-[15em]');
+        });
     }
 
     exmapleContentVStack(id:string) {
@@ -131,20 +146,27 @@ VStack([
     new TextElement("Uno"), 
     new TextElement("Dos"), 
     new TextElement("Tres"), 
-],
-    class: ["custom-css"]
-);
+],{
+    class: ["custom-css"],
+    node: "custom",
+    type: VStackType.Grid
+});
         `;
-        let output = `<div class="flex items-start">
-            <b>output:</b> 
-            <p class="ml-[1em] px-3 py-1 border border-gray-200 w-fit flex flex-col">
-                <span>Uno</span>
-                <span>Dos</span>
-                <span>Tres</span>
-            </p>
-        </div>`;
+        let output = VStack([
+            new TextElement("Uno"), 
+            new TextElement("Dos"), 
+            new TextElement("Tres"), 
+        ],{
+            class: ["border","p-2","rounded","w-[30%]"],
+            node: "custom",
+            type: VStackType.Grid
+        });
 
-        exampleBlockContent(this.lorem,code,null,this.centerContainer,true,id);
+        exampleBlockContent(this.lorem,code,output,this.container1,true,id).then(co => {
+            let divided = co.querySelector('.divided');
+            let divs = divided.querySelectorAll('div');
+                divs[1].classList.add('h-[15em]');
+        });
     }
 
     exmapleContentHStack(id:string) {
@@ -153,32 +175,38 @@ HStack([
     new TextElement("Uno"),
     new TextElement("Dos"),
     new TextElement("Tres"),
-],
+], {
     class: ["custom-css"]
-);
+});
         `;
-        let output = `<div class="flex items-start">
-            <b>output:</b> 
-            <p class="ml-[1em] px-3 py-1 border border-gray-200 w-fit">
-                <span>Uno</span>
-                <span>Dos</span>
-                <span>Tres</span>
-            </p>
-        </div>`;
+        let output = HStack([
+            new TextElement("Uno",{ class: ["w-full"] }),
+            new TextElement("Dos",{ class: ["w-full"] }),
+            new TextElement("Tres",{ class: ["w-full"] }),
+        ], {
+            class: ["border","p-2","rounded","w-[10em]","flex","space-between","items-center"],
+        });
 
-        exampleBlockContent(this.lorem,code,null,this.centerContainer,true,id);
+        exampleBlockContent(this.lorem,code,output,this.container1,true,id);
     }
 
     exmapleContentTable(id:string) {
         let code = `
-var tbl = Table<{
-    id: string,
+let tbl: TableConstructor<{
+    id: number,
     name: string,
+    lname: string
+}>;
+
+tbl = Table<{
+    id: number,
+    name: string,
+    lname: string
 }>([
     {
         header: { title: "ID" },
         data: (_row) => {
-            return new TextElement(_row.id);
+            return new TextElement(_row.id.toString());
         }
     },
     {
@@ -187,51 +215,81 @@ var tbl = Table<{
             return new TextElement(_row.name);
         }
     },
-]);
+    {
+        header: { title: "Pellido" },
+        data: (_row) => {
+            return new TextElement(_row.lname);
+        }
+    },
+],{
+    outsideBorder: true
+});
 
 // asigno valores a la tabla 
-tbl.data = sourceData;
+tbl.data = [
+    { id: 1, name: "Uno" , lname: "Uno" },
+    { id: 2, name: "Dos" , lname: "Dos" },
+    { id: 3, name: "Tres" , lname: "Tres" },
+];
 `;
-        let output = `<div class="flex items-start">
-            <b>output:</b> <table class="ml-[1em] border w-fit">
-                <thead class="text-gray-700 bg-gray-100 border-b">
-                    <tr class="text-xs">
-                        <th class="px-4 py-2">ID</th>
-                        <th class="px-4 py-2 text-left">Nombre</th>
-                    </tr>
-                </thead>
-                <tbody class="text-xs">
-                    <tr class="border-b">
-                        <td class="px-4 py-2 text-center">1</td>
-                        <td class="px-4 py-2">Davivienda</td>
-                    </tr>
-                    <tr class="border-b">
-                        <td class="px-4 py-2 text-center">2</td>
-                        <td class="px-4 py-2">Banreservas</td>
-                    </tr>
-                    <tr class="border-b">
-                        <td class="px-4 py-2 text-center">3</td>
-                        <td class="px-4 py-2">Banco Popular Dominicano</td>
-                    </tr>
-                </tbody>
-            <table>
-        </div>`;
+        let table: TableConstructor<{
+            id: number,
+            name: string,
+            lname: string
+        }>;
 
-        exampleBlockContent(this.lorem,code,null,this.centerContainer,true,id);
+        table = Table<{
+            id: number,
+            name: string,
+            lname: string
+        }>([
+            {
+                header: { title: "ID" },
+                data: (_row) => {
+                    return new TextElement(_row.id.toString());
+                }
+            },
+            {
+                header: { title: "Nombre" },
+                data: (_row) => {
+                    return new TextElement(_row.name);
+                }
+            },
+            {
+                header: { title: "Pellido" },
+                data: (_row) => {
+                    return new TextElement(_row.lname);
+                }
+            },
+        ],{
+            outsideBorder: true
+        });
+
+        // asigno valores a la tabla 
+        table.data = [
+            { id: 1, name: "Uno" , lname: "Uno" },
+            { id: 2, name: "Dos" , lname: "Dos" },
+            { id: 3, name: "Tres" , lname: "Tres" },
+        ];
+
+        exampleBlockContent(this.lorem,code,table,this.container1,true,id).then(co => {
+            let divided = co.querySelector('.divided');
+            let divs = divided.querySelectorAll('div');
+                divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
+        });
     }
 
     exmapleContentSelect(id:string) {
         let code = `
+let icon = document.createElement('i');
+    icon.className = 'fa fa-caret-down text-gray-500 ml-[.4em]';
+
 let slct = new SelectElement({
     tag: "relationType",
     title: "Relación",
     model: "relation",
-    buttonIcon: new GenericIcon(
-        IconDAV,
-        { 
-            class: [ "icon-rotate","reflect-horizontal"]
-        }
-    )
+    buttonIcon: icon,
+    placeholder: "Seleccione", 
 });
 
 slct.data = [{ 
@@ -245,18 +303,39 @@ slct.data = [{
     value: 3,
 }];
         `;
-        let output = `<div class="flex justify-start items-start">
-            <b>output:</b> <div class="ml-[1em] flex flex-col">
-                <b class="text-[10px]">Relación</b>
-                <select class="border px-3 py-1">
-                    <option value="0">Seleccione</option>
-                    <option value="1">Valor 1</option>
-                    <option value="2">Valor 2</option>
-                    <option value="3">Valor 3</option>
-                </select>
-            </div>
-        </div>`;
-        exampleBlockContent(this.lorem,code,null,this.centerContainer,true,id);
+
+        let icon = document.createElement('i');
+            icon.className = 'fa fa-caret-down text-gray-500 ml-[.4em]';
+
+        let slct = new SelectElement({
+            tag: "relationType",
+            title: "Relación",
+            model: "relation",
+            buttonIcon: icon,
+            placeholder: "Seleccione", 
+        });
+
+        slct.className = "w-[35%] pl-[1em]";
+        
+        slct.data = [
+            { 
+                name: "Valor 1",
+                value: "Valor 1", 
+            }, 
+            { 
+                name: "Valor 2",
+                value: "Valor 2",
+            }, 
+            {
+                name: "Valor 3",
+                value: "Valor 3",
+            }
+        ];
+        exampleBlockContent(this.lorem,code,slct,this.container1,true,id).then(co => {
+            let divided = co.querySelector('.divided');
+            let divs = divided.querySelectorAll('div');
+                divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
+        });
     }
 
     exmapleContentInput(id:string) {
@@ -266,28 +345,47 @@ let inpNumber = new InputElement({
     title: "Número de Identificación",
     model: "idNum",
     typeNumber: true,
-    maxLength: 10
+    maxLength: 10,
+    placeholder: "ingrece un numero"
 });
 
 let inpText = new InputElement({
     tag: "idtext",
     title: "Nómbre",
     model: "name",
+    placeholder: "Ingrese un texto"
 });
         `;
-        let output = `<div class="flex flex-row">
-            <b>output:</b> 
-            <div class="ml-[1em] flex flex-col">
-                <b class="text-[10px]">Número de identificación</b>
-                <input type="number" value="0" max="10" min="0" class="outline-0 ring-1 ring-gray-400 px-4 py-1 w-full rounded text-sm"  />
-            </div> 
-            <div class="ml-[1em] flex flex-col">
-                <b class="text-[10px]">Nómbre</b>
-                <input type="text" class="outline-0 ring-1 ring-gray-400 px-4 py-1 w-full rounded text-sm"  />
-            </div>
-        </div>`;
 
-        exampleBlockContent(this.lorem,code,null,this.centerContainer,true,id);
+        let div = document.createElement('div');
+            div.className = 'flex space-between items-center';
+
+        let inpNumber = new InputElement({
+            tag: "idNum",
+            title: "Número de Identificación",
+            model: "idNum",
+            typeNumber: true,
+            maxLength: 10,
+            placeholder: "ingrece un numero"
+        });
+        
+        let inpText = new InputElement({
+            tag: "idtext",
+            title: "Nómbre",
+            model: "name",
+            placeholder: "Ingrese un texto"
+        });
+
+        inpText.className = "ml-[1em]";
+
+        div.appendChild(inpNumber);
+        div.appendChild(inpText);
+
+        exampleBlockContent(this.lorem,code,div,this.container1,true,id).then(co => {
+            let divided = co.querySelector('.divided');
+            let divs = divided.querySelectorAll('div');
+                divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
+        });
     }
 }
 

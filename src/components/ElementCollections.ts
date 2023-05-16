@@ -1,5 +1,33 @@
 import { setTextFormat } from "../engine/Engine";
 
+const actionTabs = (parent:HTMLElement) => {
+    let menuTabs = document.getElementById('tabs-menu');
+    let a_s = menuTabs.querySelectorAll('a');
+
+    a_s.forEach(a => {
+        a.onclick = () => {
+            let target = a.dataset.target;
+            let containers = document.querySelectorAll('.container_a');
+
+                containers.forEach(co => {
+                    co.classList.add('hidden');
+                });
+                
+                a_s.forEach(_a => {
+                    _a.classList.remove('border-yellow-400','text-yellow-400');
+                })
+                
+                containers.forEach(co => {
+                    if(target == co.id)
+                    {
+                        co.classList.remove('hidden');
+                        a.classList.add('border-yellow-400','text-yellow-400');
+                    }
+                });
+        }
+    })
+}
+
 const activeSearchInput = (parent:HTMLElement) => {
     let input = parent.querySelector('input');
         input.oninput = (ev) => {
@@ -181,7 +209,7 @@ const exampleBlockContent = async function(str:string,code:string,output?:HTMLEl
         oleft.className = 'font-bold';
         oleft.innerText = 'output:';
     let oright = document.createElement('div');
-        oright.className = 'ml-[1em]';
+        oright.className = 'ml-[1em] w-full';
         
     outputContent.appendChild(oleft);
     outputContent.appendChild(oright);
@@ -204,5 +232,6 @@ export {
     shadeTextBlock,
     exampleBlockContent,
     implementScrollUp,
-    activeSearchInput
+    activeSearchInput,
+    actionTabs
 }
