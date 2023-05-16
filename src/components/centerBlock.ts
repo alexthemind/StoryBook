@@ -21,7 +21,17 @@ import {
     ,IconDAV
     ,InputElement
     ,VStackType
+    ,CheckBoxElement
 } from 'ait-bpd-common-core';
+import {
+     XAppModal
+    ,XAppDialog
+    ,XAppDialogStatuses
+    ,CloseAppActionsEnum
+    ,XAppDialogTypes
+    ,XAppDialogIcons
+    ,AitXIcon
+} from 'ait-bpd-common';
 
 
 
@@ -60,8 +70,12 @@ class CenterBlock extends Controller {
         this.exmapleContentTable("table");
         this.shadeText("Select");
         this.exmapleContentSelect("select");
-        this.shadeText("input");
+        this.shadeText("Input");
         this.exmapleContentInput("input");
+        this.shadeText("Checkbox");
+        this.exampleContentCheckbox("checkbox");
+        this.shadeText("Dialog");
+        this.exampleContentDialog("dialog");
     }
 
     BList() {
@@ -75,6 +89,7 @@ class CenterBlock extends Controller {
             { name: 'Select', href: 'select',icon: 'fa fa-caret-right' },
             { name: 'Input', href: 'input',icon: 'fa fa-caret-right' },
             { name: 'Checkbox', href: 'checkbox',icon: 'fa fa-caret-right' },
+            { name: 'Dialog', href: 'dialog',icon: 'fa fa-caret-right' },
         ]
 
         return buildUiList(items,this.left);
@@ -386,6 +401,158 @@ let inpText = new InputElement({
             let divs = divided.querySelectorAll('div');
                 divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
         });
+    }
+
+    exampleContentCheckbox(id:string) {
+        let code = `
+let check = new CheckBoxElement({
+    checked: false, 
+    disabled: false, 
+    target: (check) => {
+        if(check.check)
+        {
+            alert("Marcado!");
+        }
+        else
+        {
+            alert("Desmarcado!");
+        }
+    },
+    class: ["custom-css"]
+});
+        `;
+
+        let check = new CheckBoxElement({
+                checked: false, 
+                disabled: false, 
+                target: (check) => {
+                    if(check.check)
+                    {
+                        alert("Marcado!");
+                    }
+                    else
+                    {
+                        alert("Desmarcado!");
+                    }
+                },
+                class: ["custom-css"]
+            });
+
+        exampleBlockContent(this.lorem,code,check,this.container1,true,id).then(co => {
+            let divided = co.querySelector('.divided');
+            let divs = divided.querySelectorAll('div');
+                divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
+        });
+    }
+
+    exampleContentDialog(id:string) {
+
+        let code = `
+new ButtonElement(
+    new TextElement("Default"),
+    {
+        target: () => {
+            new XAppDialog({
+                status: XAppDialogStatuses.error,
+                message: "Dialog por defecto",
+                type: XAppDialogTypes.alert,
+                icon: XAppDialogIcons.error
+            }).show();
+        },
+        class: ["custom-css"]
+    }
+);
+        `;
+
+        let error = new ButtonElement(
+            new TextElement("Default"),
+            {
+                target: () => {
+                    new XAppDialog({
+                        status: XAppDialogStatuses.error,
+                        message: "Dialog por defecto",
+                        type: XAppDialogTypes.alert,
+                        icon: XAppDialogIcons.error,
+                    }).show();
+                },
+                class: ["p-2","w-[25%]","bg-red-500","hover:bg-red-600","text-white","rounded","flex","justify-center","items-center","mb-1"]
+            }
+        );
+
+        let info = new ButtonElement(
+            new TextElement("Info"),
+            {
+                target: () => {
+                    new XAppDialog({
+                        status: XAppDialogStatuses.info,
+                        message: "Dialog de información",
+                        type: XAppDialogTypes.alert,
+                        icon: XAppDialogIcons.info
+                    }).show();
+                },
+                class: ["p-2","w-[25%]","bg-blue-500","hover:bg-blue-600","text-white","rounded","flex","justify-center","items-center","mb-1"]
+            }
+        );
+
+        let success = new ButtonElement(
+            new TextElement("Success"),
+            {
+                target: () => {
+                    new XAppDialog({
+                        status: XAppDialogStatuses.success,
+                        message: "Dialog de aprobación",
+                        type: XAppDialogTypes.alert,
+                        icon: XAppDialogIcons.success
+                    }).show();
+                },
+                class: ["p-2","w-[25%]","bg-teal-500","hover:bg-teal-600","text-white","rounded","flex","justify-center","items-center","mb-1"]
+            }
+        );
+
+        let confirm = new ButtonElement(
+            new TextElement("Confirm"),
+            {
+                target: () => {
+                    new XAppDialog({
+                        status: XAppDialogStatuses.confirm,
+                        message: "Dialog de confirmación",
+                        type: XAppDialogTypes.confirm,
+                        icon: XAppDialogIcons.confirm
+                    }).show();
+                },
+                class: ["p-2","w-[25%]","bg-blue-500","hover:bg-blue-600","text-white","rounded","flex","justify-center","items-center","mb-1"]
+            }
+        );
+
+        let alert = new ButtonElement(
+            new TextElement("alert"),
+            {
+                target: () => {
+                    new XAppDialog({
+                        status: XAppDialogStatuses.alert,
+                        message: "Dialog de alerta",
+                        type: XAppDialogTypes.alert,
+                        icon: XAppDialogIcons.alert
+                    }).show();
+                },
+                class: ["p-2","w-[25%]",'text-gray-500',"bg-yellow-400","hover:bg-yellow-500","rounded","flex","justify-center","items-center","mb-1"]
+            }
+        );
+
+        let vstack = VStack([
+            error,
+            info,
+            success,
+            confirm,
+            alert
+        ]);
+
+        exampleBlockContent(this.lorem,code,vstack,this.container1,true,id).then(co => {
+            let divided = co.querySelector('.divided');
+            let divs = divided.querySelectorAll('div');
+                divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
+        });
+
     }
 }
 

@@ -83,6 +83,7 @@ module.exports = (env,arg) => {
         externals: {
             "x-tag": "x-tag",
             "ait-bpd-common-core": "AIT-BPD-Common-core",
+            "ait-bpd-common": "AIT-BPD-Common",
         },
         resolve: {
             extensions: [".tsx",".ts",".js",".jsx",".json"],
