@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="550px" height="550px" viewBox="0 0 550 550" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>OK</title>
+    <desc>Created with Sketch.</desc>
+    <g id="OK" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval" fill-opacity="0.33" fill="#86B254" cx="275" cy="275" r="275"></circle>
+        <polyline id="Rectangle" stroke="#4C8D00" stroke-width="70" stroke-linecap="round" stroke-linejoin="round" transform="translate(274.971925, 250.000000) rotate(-315.000000) translate(-274.971925, -250.000000) " points="337.943851 124 337.943851 376 212 376"></polyline>
+    </g>
+</svg>
