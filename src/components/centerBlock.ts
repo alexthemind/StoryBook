@@ -39,13 +39,21 @@ import {
 class CenterBlock extends Controller {
 
     lorem = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci nihil, harum quam exercitationem quidem impedit ea corrupti debitis officia eos maiores aliquam in incidunt minus illum corporis tenetur expedita pariatur."
+    descTexto = "El elemento <b>TextElement</b>, representa un elemento de control para la edición de texto sin formato.<br><br>Este elemento tiene dos parametros: <b>text:</b> tipo <em>string</em>, el cual es requerido, y <b>options:</b> tipo <em>TextElementOptions</em>, el cual es opcional.<br><br>Las opciones disponibles de tipo <em>TextElementOptions</em> son:  <b>alignment</b>, <b>class</b> y <b>node</b>"
+    descButton = "El elemento <b>ButtonElement</b> representa un elemento cliqueable de tipo botón que puede ser utilizado en formularios o en cualquier parte de la página que necesite un botón.<br><br> Este elemento tiene dos parametros: <b>content:</b> de tipo <em>AITElement</em> o de tipo <em>HTMLElement</em>, el cual es requerido, y <b>options:</b> de tipo <em>ButtonElementOptions</em>, el cual es opcional.<br><br> Las opciones disponibles de tipo <em>ButtonElementOptions</em> son: <b>type</b>, <b>disabled</b>, <b>class</b>, <b>node</b> y <b>target</b>"
+    descVStack = "El elemento <b>VStack</b> representa un elemento que puede ser utilizado para crear secciones o agrupar contenidos con orientación vértical.<br><br> Este elemento tiene dos parametros: <b>elements:</b> un arreglo de tipo <em>HTMLElement</em> o de tipo <em>AITElement</em>, el cual es requerido, y <b>options:</b> de tipo <em>VStackConstructorOptions</em>, el cual es opcional.<br><br> Las opciones de tipo <em>VStackConstructorOptions</em> son: <b>type</b>, <b>node</b> y <b>class</b>"
+    descHStack = "El elemento <b>HStack</b> representa un elemento que puede ser utilizado para crear secciones o agrupar contenidos con orientación horizontal.<br><br> Este elemento tiene dos parametros: <b>elements:</b> un arreglo de tipo <em>HTMLElement</em> o de tipo <em>AITElement</em>, el cual es requerido, y <b>options:</b> de tipo <em>HStackConstructorOptions</em>, el cual es opcional.<br><br> Las opciones de tipo <em>HStackConstructorOptions</em> son: <b>type</b>, <b>node</b> y <b>class</b>"
+    descTable = "El Elemento <b>Table</b> representa un elemento para agrupar datos en dos o mas dimensiones.<br><br> Este elemento tiene dos objetos como parametros: <b>columns</b>, el cual es requerido, y <b>options:</b>, el cual es opcional.<br><br>El objeto <em>columns</em> tiene como parametros requeridos: <b>header:</b> de tipo <em>TableColumnHeaderOptions</em> y <b>data:</b>, el cual a su vez es un objeto formado por <b>_row:</b> de tipo <em>RowType</em>, <b>_id:</b> de tipo <em>number</em>.<br><br>En el parametro options solo existe un parametro: <b>outsideBorder:</b>de tipo <em>boolean</em>"
+    descSelect = "El elemento <b>SelectElement</b> representa un elemento de control que muestra un menú de opciones<br><br>Este elemento tiene un parametro opcional llamado <b>options:</b> de tipo <em>AITSelectOptions</em>.<br><br>Las opciones disponibles de tipo <em>AITSelectOptions</em> son: <b>buttonIcon:</b> de tipo <em>HTMLElement</em> o de tipo <em>AITElement</em>, <b>title:</b> de tipo <em>string</em>, <b>placeholder:</b> de tipo <em>string</em> y un metodo <b>setValue:</b> con parametros <b>select:</b> de tipo <em>SelectElement</em> y <b>value:</b> de tipo <em>string</em>"
+    descInput = "El elemento <b>InputElement</b> representa un elemento que se puede usar para crear controles interactivos, con el fin de recibir datos del usuario.<br><br>Este elemento tiene un parametro opcional llamado <b>options:</b> de tipo <em>InputElementOptions</em>.<br><br>Las opciones disponibles de tipo <em>InputElementOptions</em> son: un metodo <b>setValue:</b> con los parametros: <b>select:</b> de tipo <em>InputElement</em> y <b>value:</b> de tipo <em>string</em>, <b>placeholder:</b> de tipo <em>string</em>, <b>alignment?:</b> de tipo <em>TextAlignment</em>, <b>prefix?:</b> de tipo <em>InputElementPrefix</em>, <b>maxLength:</b> de tipo <em>number</em>, <b>typeNumber:</b> de <em>tipo boolean</em>"
+    descCheckbox = "El elemento <b>CheckBoxElement</b> representa un elemento de control que permite seleccionar una o mas opciones en un formulario.<br><br>Este elemento tiene un parametro opcional llamado <b>options</b> de tipo <em>CheckBoxElementOptions</em>.<br><br>Las opciones disponibles de tipo <em>CheckBoxElementOptions</em> son:  un metodo <b>target</b> con parametro <b>ev</b> de tipo <em>CheckBoxElement</em>, <b>disabled?:</b> de tipo <em>boolean</em>, <b>class?:</b> un arreglo de tipo <em>string</em> y <b>checked?:</b> de tipo <em>boolean</em>"
+    descDialog = "El elemento <b>XAppDialog</b> representa un elemento que puede ser utilizado para mostrar una ventana de dialogo dependiendo de la situacion del usuario.<br><br>Este elemento tiene un parametro requerido llamado <b>config:</b> de tipo <em>XAppDialogConfig</em>.<br><br>Las opciones disponibles de tipo <em>XAppDialogConfig</em> son: <b>type:</b> de tipo <em>XAppDialogTypes</em>, <b>status:</b> de tipo <em>XAppDialogStatuses</em>, <b>icon:</b> de tipo <em>string</em>, <b>title:</b> de tipo <em>string</em>, <b>message:</b>de tipo <em>string</em>, <b>actions:</b> de tipo <em>XAppDialogButtons</em>, <b>color:</b> de tipo <em>string</em> y el parametro <b>context:</b> formado por los parametros <b>selector:</b> de tipo <em>string</em> y <b>attachMethod:</b> de tipo <em>XAppDialogAttachMethod</em>."
     stylei = "text-cyan-300";
     stylev = "text-teal-300";
     stylel = "text-red-300";
     styler = "text-purple-300";
     stylen = "text-blue-400";
     stylef = "text-yellow-300";
-
     constructor() {
         super();
 
@@ -112,7 +120,7 @@ new TextElement("Hola a todos",{
         
         let textElm = new TextElement("Hola a todos", { class: ["border","p-2","rounded"] });
         
-        exampleBlockContent(this.lorem,code,textElm,this.container1,true,id);
+        exampleBlockContent(this.descTexto,code,textElm,this.container1,true,id);
     }
 
     exmapleContentButton(id:string) {
@@ -148,7 +156,7 @@ new ButtonElement(
             ]
         });
 
-        exampleBlockContent(this.lorem,code,output,this.container1,true,id).then(co => {
+        exampleBlockContent(this.descButton,code,output,this.container1,true,id).then(co => {
             let divided = co.querySelector('.divided');
             let divs = divided.querySelectorAll('div');
                 divs[1].classList.add('h-[15em]');
@@ -177,7 +185,7 @@ VStack([
             type: VStackType.Grid
         });
 
-        exampleBlockContent(this.lorem,code,output,this.container1,true,id).then(co => {
+        exampleBlockContent(this.descVStack,code,output,this.container1,true,id).then(co => {
             let divided = co.querySelector('.divided');
             let divs = divided.querySelectorAll('div');
                 divs[1].classList.add('h-[15em]');
@@ -202,7 +210,7 @@ HStack([
             class: ["border","p-2","rounded","w-[10em]","flex","space-between","items-center"],
         });
 
-        exampleBlockContent(this.lorem,code,output,this.container1,true,id);
+        exampleBlockContent(this.descHStack,code,output,this.container1,true,id);
     }
 
     exmapleContentTable(id:string) {
@@ -287,7 +295,7 @@ tbl.data = [
             { id: 3, name: "Tres" , lname: "Tres" },
         ];
 
-        exampleBlockContent(this.lorem,code,table,this.container1,true,id).then(co => {
+        exampleBlockContent(this.descTable,code,table,this.container1,true,id).then(co => {
             let divided = co.querySelector('.divided');
             let divs = divided.querySelectorAll('div');
                 divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
@@ -346,7 +354,7 @@ slct.data = [{
                 value: "Valor 3",
             }
         ];
-        exampleBlockContent(this.lorem,code,slct,this.container1,true,id).then(co => {
+        exampleBlockContent(this.descSelect,code,slct,this.container1,true,id).then(co => {
             let divided = co.querySelector('.divided');
             let divs = divided.querySelectorAll('div');
                 divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
@@ -396,7 +404,7 @@ let inpText = new InputElement({
         div.appendChild(inpNumber);
         div.appendChild(inpText);
 
-        exampleBlockContent(this.lorem,code,div,this.container1,true,id).then(co => {
+        exampleBlockContent(this.descInput,code,div,this.container1,true,id).then(co => {
             let divided = co.querySelector('.divided');
             let divs = divided.querySelectorAll('div');
                 divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
@@ -438,7 +446,7 @@ let check = new CheckBoxElement({
                 class: ["custom-css"]
             });
 
-        exampleBlockContent(this.lorem,code,check,this.container1,true,id).then(co => {
+        exampleBlockContent(this.descCheckbox,code,check,this.container1,true,id).then(co => {
             let divided = co.querySelector('.divided');
             let divs = divided.querySelectorAll('div');
                 divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
@@ -547,7 +555,7 @@ new ButtonElement(
             alert
         ]);
 
-        exampleBlockContent(this.lorem,code,vstack,this.container1,true,id).then(co => {
+        exampleBlockContent(this.descDialog,code,vstack,this.container1,true,id).then(co => {
             let divided = co.querySelector('.divided');
             let divs = divided.querySelectorAll('div');
                 divs[1].classList.add('h-[17em]','w-[70%]','overflow-y-scroll');
